@@ -1,0 +1,9 @@
+{
+  "/api/email/route": "app/api/email/route.js",
+  "/favicon.ico/route": "app/favicon.ico/route.js",
+  "/page": "app/page.js",
+  "/api/blog/route": "app/api/blog/route.js",
+  "/admin/blogList/page": "app/admin/blogList/page.js",
+  "/admin/subscription/page": "app/admin/subscription/page.js",
+  "/admin/page": "app/admin/page.js"
+}
