@@ -1,5 +1,6 @@
 import { assets } from "Assets/assets";
 import Image from "next/image";
+import Link from "next/link";
 import React from "react";
 
 const BlogTableItem = ({
@@ -27,6 +28,9 @@ const BlogTableItem = ({
       </th>
       <td className="px-6 py-4">{title ? title : "No Title"}</td>
       <td className="px-6 py-4">{blogDate.toDateString()}</td>
+      <td>
+        <Link href={`/admin/editBlog/${mongoId}`}>Edit</Link>
+      </td>
       <td onClick={() => deleteBlog(mongoId)} className="px-6 py-4">
         X
       </td>

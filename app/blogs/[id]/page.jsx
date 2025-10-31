@@ -38,18 +38,18 @@ const Page = ({ params }) => {
     <div className="flex flex-col items-center animate-pulse py-10">
       <div className="w-full max-w-[800px] space-y-10">
         {/* Judul + Author */}
-        <div className="text-center space-y-6">
-          <div className="h-10 sm:h-12 bg-gray-300 rounded w-3/4 mx-auto"></div>
-          <div className="h-8 sm:h-10 bg-gray-300 rounded w-1/2 mx-auto"></div>
-          <div className="w-[60px] h-[60px] bg-gray-300 rounded-full mx-auto"></div>
-          <div className="h-4 bg-gray-300 rounded w-1/3 mx-auto"></div>
+        <div className="text-center space-y-6 mb-4">
+          <div className="h-10 mb-2 sm:h-12 bg-gray-300 rounded w-3/4 mx-auto"></div>
+          <div className="h-8 mb-2 sm:h-10 bg-gray-300 rounded w-1/2 mx-auto"></div>
+          <div className="w-[60px] mb-2 h-[60px] bg-gray-300 rounded-full mx-auto"></div>
+          <div className="h-4 mb-2 bg-gray-300 rounded w-1/3 mx-auto"></div>
         </div>
 
         {/* Gambar utama */}
-        <div className="w-full h-[400px] bg-gray-300 rounded-md"></div>
+        <div className="w-full h-48 bg-gray-300 rounded-md mb-4"></div>
 
         {/* Isi konten */}
-        <div className="space-y-3">
+        <div className="space-y-3 mb-4">
           <div className="h-4 bg-gray-300 rounded w-full"></div>
           <div className="h-4 bg-gray-300 rounded w-11/12"></div>
           <div className="h-4 bg-gray-300 rounded w-10/12"></div>
@@ -61,7 +61,7 @@ const Page = ({ params }) => {
         </div>
 
         {/* Bagian share */}
-        <div className="space-y-4">
+        <div className="space-y-4 mb-4">
           <div className="h-6 bg-gray-300 rounded w-[240px]"></div>
           <div className="flex gap-4 justify-start">
             <div className="w-[50px] h-[50px] bg-gray-300 rounded-full"></div>
