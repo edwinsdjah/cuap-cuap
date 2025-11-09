@@ -9,21 +9,13 @@ import LoginModal from '../Components/LoginModal';
 import { useEffect, useState } from 'react';
 
 export default function Home() {
-  const searchParams = useSearchParams();
-  const [showlogin, setShowLogin] = useState(false);
-
-  useEffect(() => {
-    if (searchParams.get('login') === 'true') {
-      setShowLogin(true);
-    }
-  }, [searchParams]);
+  const [showLogin, setShowLogin] = useState(false);
 
   return (
     <>
-      {console.log(showlogin)}
       <ToastContainer theme='dark' />
       <Header />
-      {showlogin && (
+      {showLogin && (
         <LoginModal isOpen={showLogin} onClose={() => setShowLogin(false)} />
       )}
       <BlogList />

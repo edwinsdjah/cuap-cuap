@@ -34,10 +34,12 @@ export async function POST(req) {
     const res = NextResponse.json({
       success: true,
       msg: 'Login Successfull',
+      user: { id: user._id, username: user.username },
     });
     res.cookies.set('token', token, {
       httpOnly: true,
       secure: process.env.NODE_ENV === 'production',
+      sameSite: 'strict',
       maxAge: 24 * 60 * 60,
       path: '/',
     });
