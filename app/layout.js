@@ -15,7 +15,7 @@ export default function RootLayout({ children }) {
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch('/api/auth/me');
+        const res = await fetch('/api/me');
         const data = await res.json();
         if (data.authenticated) {
           setAuth(data.user);
