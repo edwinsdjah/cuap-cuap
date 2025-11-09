@@ -11,7 +11,6 @@ const Navbar = () => {
   const [showLogin, setShowLogin] = useState(false);
   const { isLoggedIn, loading, setAuth } = useAuthStore();
   const router = useRouter();
-  const searchParams = useSearchParams();
 
   // Saat pertama kali load, cek apakah user masih login (cek cookie via server)
   useEffect(() => {
