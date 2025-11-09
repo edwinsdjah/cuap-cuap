@@ -59,3 +59,45 @@ export async function DELETE(req) {
   await BlogModel.findByIdAndDelete(id);
   return NextResponse.json({ msg: "Blog Deleted" });
 }
+
+export async function PUT(req) {
+  try {
+    const id = await req.nextUrl.searchParams.get("id");
+    if (!id) {
+      return NextResponse.json(
+        { success: false, msg: "POST ID Not Found" },
+        { status: 404 }
+      );
+    }
+
+    const formData = await req.formData();
+    const updateData = {
+      title: formData.get("title")?.toString(),
+      description: formData.get("description")?.toString(),
+      category: formData.get("category")?.toString(),
+      author: formData.get("category")?.toString(),
+      authorImg: formData.get("authorImg")?.toString(),
+      updatedAt: new Date.now(),
+    };
+
+    // Jika ada file gambar baru
+    const image = formData.get("image");
+    if (image && image instanceof File) {
+      const timestamp = Date.now();
+      const imageByteData = await image.arrayBuffer();
+      const buffer = Buffer.from(imageByteData);
+      const path = `./public/${timestamp}_${image.name}`;
+      await writeFile(path, buffer);
+      updateData.image = `/${timestamp}_${image.name}`;
+    }
+
+    const updatedPost = await BlogModel.findByIdAndUpdate(id, updateData);
+    if (!updatedPost) {
+      return NextResponse.json({ success: false }, { status: 404 });
+    }
+
+    return NextResponse.json({ success: true, post: updatedPost });
+  } catch (error) {
+    console.log(error);
+  }
+}
