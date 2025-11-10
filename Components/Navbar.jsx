@@ -4,30 +4,35 @@ import Image from 'next/image';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import LoginModal from './LoginModal';
-import { useRouter, useSearchParams } from 'next/navigation';
+import { useRouter } from 'next/navigation';
 import { useAuthStore } from '../store/authStore';
+import { toast } from 'react-toastify';
 
 const Navbar = () => {
   const [showLogin, setShowLogin] = useState(false);
-  const { isLoggedIn, loading, setAuth } = useAuthStore();
+  const { isLoggedIn, loading, setAuth, logOut } = useAuthStore(); // ✅ tambahkan logout
   const router = useRouter();
 
-  // Saat pertama kali load, cek apakah user masih login (cek cookie via server)
+  // Saat pertama kali load, cek apakah user masih login
   useEffect(() => {
     const checkAuth = async () => {
-      const res = await fetch('/api/me', { cache: 'no-store' });
-      const data = await res.json();
-      if (data.authenticated) {
-        setAuth(data.user);
-      } else {
-        setAuth(null);
+      try {
+        const res = await fetch('/api/me', { cache: 'no-store' });
+        const data = await res.json();
+        if (data.authenticated) {
+          setAuth(data.user);
+        } else {
+          setAuth(null);
+        }
+      } catch (err) {
+        console.error('Auth check failed:', err);
       }
     };
     checkAuth();
   }, [setAuth]);
 
   const handleAdminClick = () => {
-    if (loading) return; // kalau masih cek login, jangan dulu
+    if (loading) return;
     if (isLoggedIn) {
       router.push('/admin');
     } else {
@@ -36,10 +41,30 @@ const Navbar = () => {
   };
 
   const handleLogout = async () => {
-    await fetch('/api/logout', { method: 'POST' });
-    logout();
-    window.localStorage.setItem('logout', Date.now()); // sync antar tab
-    router.push('/');
+    try {
+      const res = await fetch('/api/logout', {
+        method: 'POST',
+        credentials: 'include', // penting supaya cookie ikut terhapus
+      });
+      const data = await res.json();
+
+      if (!data.success) throw new Error('Logout request failed'); // ✅ ganti dari data.ok ke data.success
+
+      // Reset state auth di zustand
+      logOut();
+
+      // Sinkronisasi antar tab
+      window.localStorage.setItem('logout', Date.now());
+
+      // Tampilkan notifikasi
+      toast.success('Logout Successful');
+
+      // Tunggu sebentar sebelum redirect supaya toast muncul
+      setTimeout(() => router.push('/'), 500);
+    } catch (error) {
+      console.error('Logout failed:', error);
+      toast.error('Logout failed');
+    }
   };
 
   return (
