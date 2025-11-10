@@ -1,4 +1,3 @@
-// middleware.js
 import { NextResponse } from 'next/server';
 import { jwtVerify } from 'jose';
 
@@ -7,11 +6,10 @@ const SECRET_KEY = new TextEncoder().encode(
 );
 
 export async function middleware(req) {
-  const { pathname } = req.nextUrl;
   const token = req.cookies.get('token')?.value;
-  const url = req.nextUrl.clone();
+  const { pathname } = req.nextUrl;
 
-  // Abaikan assets, API, dll
+  // Bypass static dan API
   if (
     pathname.startsWith('/_next') ||
     pathname.startsWith('/api') ||
@@ -21,21 +19,22 @@ export async function middleware(req) {
     return NextResponse.next();
   }
 
-  // Proteksi /admin/*
+  // Proteksi admin
   if (pathname.startsWith('/admin')) {
     if (!token) {
-      url.pathname = '/';
-      url.searchParams.set('login', 'true');
-      return NextResponse.redirect(url);
+      const redirectUrl = new URL('/', req.url);
+      redirectUrl.searchParams.set('login', 'true');
+      return NextResponse.redirect(redirectUrl);
     }
 
     try {
       await jwtVerify(token, SECRET_KEY);
       return NextResponse.next();
-    } catch {
-      url.pathname = '/';
-      url.searchParams.set('login', 'true');
-      return NextResponse.redirect(url);
+    } catch (err) {
+      console.error('JWT verify failed:', err.message);
+      const redirectUrl = new URL('/', req.url);
+      redirectUrl.searchParams.set('login', 'true');
+      return NextResponse.redirect(redirectUrl);
     }
   }
 
