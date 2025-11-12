@@ -101,7 +101,7 @@ const Page = ({ params }) => {
               />
             </div>
             <div className="max-w-[800px] md:mx-auto mt-[-100px] mb-10 mx-auto px-20 content-container">
-              <div className="article-content-container flex flex-column flex-wrap mt-5 w-full">
+              <div className="article-content-container flex flex-col flex-wrap mt-5 w-full">
                 <div className="author-section basis-30">
                   <div className="author-detail-section flex flex-row items-center">
                     <Image
