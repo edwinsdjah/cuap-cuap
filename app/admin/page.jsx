@@ -1,9 +1,9 @@
-import React from "react";
+import React from 'react';
 
 const page = () => {
   return (
     <div>
-      <p>ini isi file page</p>
+      <p>Welcome, Admin !!</p>
     </div>
   );
 };

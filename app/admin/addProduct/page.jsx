@@ -49,7 +49,10 @@ const page = () => {
 
   return (
     <>
-      <form onSubmit={onSubmitHandler} action='pt-5 px-5 sm:pt-12 sm:pl-16'>
+      <form
+        onSubmit={onSubmitHandler}
+        className='py-5 px-5 sm:pt-12 sm:pl-16 w-full'
+      >
         <p className='text-xl'>Upload Thumbnail</p>
         <label htmlFor='image'>
           <Image
@@ -67,7 +70,7 @@ const page = () => {
           hidden
           required
         />
-        <p className='text-xl mt-4'>Blog Title</p>
+        <p className='text-xl mt-6'>Blog Title</p>
         <input
           name='title'
           onChange={onChangeHandler}
@@ -95,9 +98,11 @@ const page = () => {
           value={data.description}
           className='w-40 mt-4 px-4 py-3 border text-gray-500'
         >
-          <option value='Startup'>Startup</option>
+          <option value='Life'>Slice of Life</option>
+          <option value='Sport'>Sport</option>
           <option value='Technology'>Technology</option>
-          <option value='Lifestyle'>Lifestyle</option>
+          <option value='Art'>Music and Art</option>
+          <option value='Cinema'>Cinema</option>
         </select>
         <br />
         <button type='submit' className='mt-8 w-40 h-12 bg-black text-white'>

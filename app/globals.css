@@ -8,6 +8,30 @@ body {
   width: 100%;
 }
 
+.mgt-10 {
+  margin-top: 2rem;
+}
+
+.skel-title {
+  height: 40px;
+}
+
+.skel-image {
+  height: 500px;
+}
+
+.skel-author {
+  height: 20px;
+}
+
+.skel-text {
+  height: 20px;
+}
+
+.content-container {
+  max-width: 900px;
+}
+
 .w-full {
   width: 100% !important;
 }
