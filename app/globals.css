@@ -8,6 +8,10 @@ body {
   width: 100%;
 }
 
+.blog-img {
+  height: 720px;
+}
+
 .mgt-10 {
   margin-top: 2rem;
 }
