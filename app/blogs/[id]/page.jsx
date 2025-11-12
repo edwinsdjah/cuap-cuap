@@ -132,8 +132,36 @@ const Page = ({ params }) => {
                   Share this Article to Social Media
                 </p>
                 <div className="flex">
-                  <Image src={assets.facebook_icon} width={50} alt="" />
-                  <Image src={assets.twitter_icon} width={50} alt="" />
+                  {/* Facebook */}
+                  <button
+                    onClick={() =>
+                      window.open(
+                        `https://www.facebook.com/sharer/sharer.php?u=${encodeURIComponent(
+                          window.location.href
+                        )}`,
+                        "_blank"
+                      )
+                    }
+                  >
+                    <Image
+                      src={assets.facebook_icon}
+                      width={50}
+                      alt="Facebook"
+                    />
+                  </button>
+                  {/* Twitter */}
+                  <button
+                    onClick={() =>
+                      window.open(
+                        `https://twitter.com/intent/tweet?url=${encodeURIComponent(
+                          window.location.href
+                        )}&text=${encodeURIComponent(data.title)}`,
+                        "_blank"
+                      )
+                    }
+                  >
+                    <Image src={assets.twitter_icon} width={50} alt="Twitter" />
+                  </button>
                   <Image src={assets.googleplus_icon} width={50} alt="" />
                 </div>
               </div>

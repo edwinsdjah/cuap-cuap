@@ -45,34 +45,22 @@ const BlogList = () => {
         >
           All
         </button>
-        <button
-          onClick={() => setMenu("Technology")}
-          className={
-            menu === "Technology"
-              ? "bg-black text-white py-1 px-4 rounded-sm"
-              : ""
-          }
-        >
-          Technology
-        </button>
-        <button
-          onClick={() => setMenu("startup")}
-          className={
-            menu === "startup" ? "bg-black text-white py-1 px-4 rounded-sm" : ""
-          }
-        >
-          Startup
-        </button>
-        <button
-          onClick={() => setMenu("Lifestyle")}
-          className={
-            menu === "Lifestyle"
-              ? "bg-black text-white py-1 px-4 rounded-sm"
-              : ""
-          }
-        >
-          Lifestyle
-        </button>
+        {/* Membuat array kategori unik */}
+        {[...new Set(blogs.map((item) => item.category))].map(
+          (category, index) => (
+            <button
+              onClick={() => setMenu(category)}
+              className={
+                menu === category
+                  ? "bg-black text-white py-1 px-4 rounded-sm"
+                  : ""
+              }
+              key={index}
+            >
+              {category}
+            </button>
+          )
+        )}
       </div>
       <div className="flex flex-wrap justify-around gap-1 gap-y-10 mb-16 xl:mx-24">
         {loading

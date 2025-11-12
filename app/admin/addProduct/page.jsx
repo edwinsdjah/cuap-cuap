@@ -10,7 +10,7 @@ const page = () => {
   const initialState = {
     title: "",
     description: "",
-    category: "startup",
+    category: "Life",
     author: "Edwin Syah",
     authorImg: "/author_img.png",
   };
