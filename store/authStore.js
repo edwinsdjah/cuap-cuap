@@ -1,10 +1,11 @@
-import { create } from 'zustand';
+import { create } from "zustand";
 
-export const useAuthStore = create(set => ({
+export const useAuthStore = create((set) => ({
   isLoggedIn: false,
   user: null,
   loading: true,
-  setAuth: user =>
+  showLogin: false,
+  setAuth: (user) =>
     set({
       isLoggedIn: !!user,
       user,
@@ -16,4 +17,5 @@ export const useAuthStore = create(set => ({
       user: null,
       loading: false,
     }),
+  setShowLogin: (value) => set({ showLogin: value }),
 }));

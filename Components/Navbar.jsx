@@ -1,23 +1,32 @@
-'use client';
-import { assets } from 'Assets/assets';
-import Image from 'next/image';
-import Link from 'next/link';
-import React, { useEffect, useState } from 'react';
-import LoginModal from './LoginModal';
-import { useRouter } from 'next/navigation';
-import { useAuthStore } from '../store/authStore';
-import { toast } from 'react-toastify';
+"use client";
+import { assets } from "Assets/assets";
+import Image from "next/image";
+import Link from "next/link";
+import React, { useEffect, useState } from "react";
+import LoginModal from "./LoginModal";
+import { useRouter, useSearchParams } from "next/navigation";
+import { useAuthStore } from "../store/authStore";
+import { toast } from "react-toastify";
 
 const Navbar = () => {
-  const [showLogin, setShowLogin] = useState(false);
-  const { isLoggedIn, loading, setAuth, logOut } = useAuthStore(); // ✅ tambahkan logout
+  const { isLoggedIn, loading, setAuth, logOut, showLogin, setShowLogin } =
+    useAuthStore(); // ✅ tambahkan logout
   const router = useRouter();
+
+  const searchParams = useSearchParams();
+
+  // kalau ada perubahan parameter akan triger showlogin modal untuk muncul
+  useEffect(() => {
+    if (searchParams.get("login") === "true") {
+      setShowLogin(true); // ✅ tampilkan modal login
+    }
+  }, [searchParams, setShowLogin]);
 
   // Saat pertama kali load, cek apakah user masih login
   useEffect(() => {
     const checkAuth = async () => {
       try {
-        const res = await fetch('/api/me', { cache: 'no-store' });
+        const res = await fetch("/api/me", { cache: "no-store" });
         const data = await res.json();
         if (data.authenticated) {
           setAuth(data.user);
@@ -25,7 +34,7 @@ const Navbar = () => {
           setAuth(null);
         }
       } catch (err) {
-        console.error('Auth check failed:', err);
+        console.error("Auth check failed:", err);
       }
     };
     checkAuth();
@@ -34,7 +43,7 @@ const Navbar = () => {
   const handleAdminClick = () => {
     if (loading) return;
     if (isLoggedIn) {
-      router.push('/admin');
+      router.push("/admin");
     } else {
       setShowLogin(true);
     }
@@ -42,50 +51,50 @@ const Navbar = () => {
 
   const handleLogout = async () => {
     try {
-      const res = await fetch('/api/logout', {
-        method: 'POST',
-        credentials: 'include', // penting supaya cookie ikut terhapus
+      const res = await fetch("/api/logout", {
+        method: "POST",
+        credentials: "include", // penting supaya cookie ikut terhapus
       });
       const data = await res.json();
 
-      if (!data.success) throw new Error('Logout request failed'); // ✅ ganti dari data.ok ke data.success
+      if (!data.success) throw new Error("Logout request failed"); // ✅ ganti dari data.ok ke data.success
 
       // Reset state auth di zustand
       logOut();
 
       // Sinkronisasi antar tab
-      window.localStorage.setItem('logout', Date.now());
+      window.localStorage.setItem("logout", Date.now());
 
       // Tampilkan notifikasi
-      toast.success('Logout Successful');
+      toast.success("Logout Successful");
 
       // Tunggu sebentar sebelum redirect supaya toast muncul
-      setTimeout(() => router.push('/'), 500);
+      setTimeout(() => router.push("/"), 500);
     } catch (error) {
-      console.error('Logout failed:', error);
-      toast.error('Logout failed');
+      console.error("Logout failed:", error);
+      toast.error("Logout failed");
     }
   };
 
   return (
-    <div className='flex justify-between items-center'>
-      <Link href='/'>
-        <Image src={assets.logo} width={180} alt='Logo' />
+    <div className="flex justify-between items-center">
+      <Link href="/" className="brand-logo">
+        <Image src={assets.logo} width={180} alt="Logo" />
       </Link>
 
-      <div className='flex items-center gap-3'>
+      <div className="flex items-center gap-3">
         <button
           onClick={handleAdminClick}
-          className='flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 border border-black shadow-[-7px_7px_0px_#000000]'
+          className="flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 border border-black shadow-[-7px_7px_0px_#000000]"
         >
           Admin Panel
-          <Image src={assets.arrow} alt='' />
+          <Image src={assets.arrow} alt="" />
         </button>
 
         {isLoggedIn && (
           <button
             onClick={handleLogout}
-            className='flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 border border-black shadow-[-7px_7px_0px_#000000]'
+            className="flex items-center gap-2 font-medium py-1 px-3 sm:py-3 sm:px-6 border border-black shadow-[-7px_7px_0px_#000000]"
           >
             Logout
           </button>

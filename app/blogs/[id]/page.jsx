@@ -85,13 +85,13 @@ const Page = ({ params }) => {
         ) : data ? (
           <div className="my-24">
             <div className="my-24">
-              <div className="article-container mt-10">
+              <div className="article-container content-container mt-10 text-center mx-auto">
                 <h1 className="text-2xl sm:text-5xl font-semibold max-w-[700px]">
                   {data.title}
                 </h1>
               </div>
             </div>
-            <div className="mt-10 w-full max-h-[720px] overflow-hidden">
+            <div className="mt-5 l:mt-10 w-full max-h-[720px] overflow-hidden">
               <Image
                 className="blog-img"
                 src={data.image}
@@ -103,20 +103,20 @@ const Page = ({ params }) => {
             <div className="max-w-[800px] md:mx-auto mt-[-100px] mb-10 mx-auto px-20 content-container">
               <div className="article-content-container flex flex-column flex-wrap mt-5 w-full">
                 <div className="author-section basis-30">
-                  <div className="author-detail-section flex flex-row justify-center items-center">
+                  <div className="author-detail-section flex flex-row items-center">
                     <Image
-                      className="mt-6 border border-white rounded-full "
+                      className="mt-6 "
                       src={data.authorImg}
                       width={60}
                       height={60}
                       alt=""
                     />
-                    <p className="mt-1 pb-2 text-lg max-w-[740px] mx-auto italic">
+                    <p className="mt-1 pb-2 text-lg max-w-[740px] author-img italic">
                       {data.author}
                     </p>
                   </div>
 
-                  <div className="time-stamp">
+                  <div className="time-stamp mt-1">
                     <p>Published on {articleDate.toDateString()}</p>
                   </div>
                 </div>
