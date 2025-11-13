@@ -18,6 +18,10 @@ export default function Head() {
       <meta property="og:image" content="/og-image.png" />
       <meta property="og:type" content="website" />
       <meta name="twitter:card" content="summary_large_image" />
+      <meta
+        name="google-site-verification"
+        content="AIhgjYJiqOxPx_E0_aK19VljwkPFcFOFFvgqzQ5GB-Q"
+      />
     </>
   );
 }
