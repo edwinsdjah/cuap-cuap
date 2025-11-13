@@ -5,32 +5,34 @@ import Link from "next/link";
 import { toast, ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
 
-// CARA KERJA ROUTING DI NEXT JS ADALAH LAYOUT SEBAGAI PEMBUNGKUS UTAMA PAGENYA, LALU DI DALAMNYA DI ISI CHILDREN YANG BISA BERUBAH2,
-// PAGE.JSX HANYA SEBAGAI INDEX AGAR ROUTE TERSEBUT BISA DIJALANKAN
-
 export default function Layout({ children }) {
   return (
     <>
-      <div className="flex w-full py-5 px-5 md:px-12 lg:px-20">
+      <div className="flex w-full min-h-screen bg-[#fafafa]">
+        {" "}
+        {/* off-white background */}
         <ToastContainer theme="dark" />
-        <div className="flex flex-col w-full border-b border-black bg-white shadow-sm">
-          <div className="flex items-center justify-between w-full py-3 max-h-[60px] px-12 ">
-            <div className="px-2 sm:pl-14 py-3">
+        <div className="flex flex-col w-full">
+          {/* === NAVBAR === */}
+          <div className="flex items-center justify-between w-full py-4 px-8 border-b border-black bg-white shadow-sm px-10">
+            <div className="flex items-center gap-2">
               <Link href={"/"}>
-                <Image src={assets.logo} width={128} alt="" />
+                <Image src={assets.logo} width={128} alt="Logo" />
               </Link>
             </div>
-            <h3 className="font-medium">Admin Panel</h3>
+            <h3 className="font-medium"></h3>
             <Image
               src={assets.profile_icon}
               className="mr-2"
               width={40}
-              alt=""
+              alt="Profile Icon"
             />
           </div>
-          <div className="flex flex-row w-full bg-slate-100 border-b-stone-950">
+
+          {/* === MAIN CONTENT === */}
+          <div className="flex flex-row flex-1 w-full bg-gray-50">
             <Sidebar />
-            {children}
+            <main className="flex-1 p-6 ">{children}</main>
           </div>
         </div>
       </div>

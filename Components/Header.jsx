@@ -26,7 +26,7 @@ const Header = () => {
     <>
       <div className="py-5 px-5 md:px-12 lg:px-28">
         <Navbar />
-        <div className="text-center my-8">
+        <div className="text-center my-8 mb-0">
           <h1 className="text-3xl sm:text-5xl font-medium ">
             Ed's Personal Blog
           </h1>

@@ -36,32 +36,38 @@ const BlogList = () => {
 
   return (
     <div>
-      <div className="flex justify-center gap-6 my-10">
-        <button
-          onClick={() => setMenu("All")}
-          className={
-            menu === "All" ? "bg-black text-white py-1 px-4 rounded-sm" : ""
-          }
-        >
-          All
-        </button>
-        {/* Membuat array kategori unik */}
-        {[...new Set(blogs.map((item) => item.category))].map(
-          (category, index) => (
-            <button
-              onClick={() => setMenu(category)}
-              className={
-                menu === category
-                  ? "bg-black text-white py-1 px-4 rounded-sm"
-                  : ""
-              }
-              key={index}
-            >
-              {category}
-            </button>
-          )
-        )}
+      <div className="flex gap-4 my-10 overflow-x-auto scrollbar-hide px-4">
+        {/* Wrapper dalam flex agar tidak terpotong */}
+        <div className="flex flex-nowrap gap-4 mx-auto">
+          <button
+            onClick={() => setMenu("All")}
+            className={`flex-shrink-0 whitespace-nowrap px-4 py-1 rounded-sm transition-all duration-200 ${
+              menu === "All"
+                ? "bg-black text-white"
+                : "bg-gray-200 hover:bg-gray-300 text-gray-700"
+            }`}
+          >
+            All
+          </button>
+
+          {[...new Set(blogs.map((item) => item.category))].map(
+            (category, index) => (
+              <button
+                key={index}
+                onClick={() => setMenu(category)}
+                className={`flex-shrink-0 whitespace-nowrap px-4 py-1 rounded-sm transition-all duration-200 ${
+                  menu === category
+                    ? "bg-black text-white"
+                    : "bg-gray-200 hover:bg-gray-300 text-gray-700"
+                }`}
+              >
+                {category}
+              </button>
+            )
+          )}
+        </div>
       </div>
+
       <div className="flex flex-wrap justify-around gap-1 gap-y-10 mb-16 xl:mx-24">
         {loading
           ? Array(8)
