@@ -53,18 +53,41 @@ const Page = ({ params }) => {
     fetchBlogData();
   }, []);
 
-  // 👉 Skeleton (tetap sama)
+  // 👉 Skeleton komponen (placeholder saat loading)
   const BlogSkeleton = () => (
     <div className="flex flex-col items-center animate-pulse py-10">
       <div className="w-full max-w-[800px] space-y-10">
-        <div className="text-center space-y-6 mb-4 skel-title">
-          <div className="h-10 mb-2 sm:h-12 bg-gray-300 rounded skel-image w-3/4 mx-auto"></div>
+        {/* Judul + Author */}
+        <div className="text-center space-y-6 mb-4 mgt-10">
+          <div className="h-10 mb-2 sm:h-12 bg-gray-300 rounded w-3/4 mx-auto skel-title"></div>
         </div>
-        <div className="w-full h-48 bg-gray-300 rounded-md mb-4"></div>
+
+        {/* Gambar utama */}
+        <div className="w-full h-48 bg-gray-300 rounded-md mb-4 skel-image mgt-10"></div>
+
+        {/* Isi konten */}
         <div className="space-y-3 mb-4">
-          <div className="h-8 mb-2 sm:h-10 bg-gray-300 rounded w-1/2 mx-auto"></div>
-          <div className="w-[60px] mb-2 h-[60px] bg-gray-300 rounded-full mx-auto"></div>
-          <div className="h-4 mb-2 bg-gray-300 rounded w-1/3 mx-auto"></div>
+          <div className="h-8 mb-2 sm:h-10 bg-gray-300 rounded w-1/2 mx-auto skel-author mgt-10"></div>
+          <div className="w-[60px] mb-2 h-[60px] bg-gray-300 rounded-full mx-auto skel-author mgt-10"></div>
+          <div className="h-4 mb-2 bg-gray-300 rounded w-1/3 mx-auto skel-author mgt-10"></div>
+          <div className="h-4 bg-gray-300 rounded w-full skel-text mgt-10"></div>
+          <div className="h-4 bg-gray-300 rounded w-11/12 skel-text mgt-10"></div>
+          <div className="h-4 bg-gray-300 rounded w-10/12 skel-text mgt-10"></div>
+          <div className="h-4 bg-gray-300 rounded w-5/6 skel-text mgt-10"></div>
+          <div className="h-4 bg-gray-300 rounded w-9/12 skel-text mgt-10"></div>
+          <div className="h-4 bg-gray-300 rounded w-full skel-text mgt-10"></div>
+          <div className="h-4 bg-gray-300 rounded w-4/6 skel-text mgt-10"></div>
+          <div className="h-4 bg-gray-300 rounded w-2/3 skel-text mgt-10"></div>
+        </div>
+
+        {/* Bagian share */}
+        <div className="space-y-4 mb-4">
+          <div className="h-6 bg-gray-300 rounded w-[240px]"></div>
+          <div className="flex gap-4 justify-start">
+            <div className="w-[50px] h-[50px] bg-gray-300 rounded-full"></div>
+            <div className="w-[50px] h-[50px] bg-gray-300 rounded-full"></div>
+            <div className="w-[50px] h-[50px] bg-gray-300 rounded-full"></div>
+          </div>
         </div>
       </div>
     </div>
